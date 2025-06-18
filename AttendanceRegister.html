@@ -14,6 +14,7 @@
         </ul>
     </nav>
 
+<div class="container">
     <!-- side navigation -->
     <nav class="sidebar">
         <ul>
@@ -24,21 +25,27 @@
     </nav>
     
     <!-- content -->
-    <h1>Event Attendance Registration</h1>
     <div class="rcorners1">
-        <form action="">
+        <h1>Event Attendance Registration</h1>
+        <form action="" method="post">
             <label for="eventname">Attendance for "event name"</label><br>
+
             <label for="location">Location:</label><br>
             <label for="geolocation">"Event geolocation"</label><br>
+
             <label for="eventdetails">Event details:</label><br>
             <label for="eventdesc">"Event description"</label><br>
+
             <label for="studentNum">Student ID:</label><br>
             <input type="text" id="studentNum" name="studentNum"><br>
+
             <label for="attendancepassword">Password:</label><br>
             <input type="text" id="attendancepassword" name="attendancepassword"><br>
+
             <input type="submit" value="Submit">
         </form>
     </div>
+</div>
 
     <!-- bottom footer -->
     <footer style="bottom: 0;"><p>©2025 FK. All Rights Reserved.</p></footer>
