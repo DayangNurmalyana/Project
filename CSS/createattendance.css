@@ -86,6 +86,7 @@ h1 {
   margin-bottom: 15px;
 }
 .box1 {
+  width: 75%;
   border-radius: 25px;
   background: white;
   align-content: left;
@@ -115,6 +116,7 @@ form {
   font-weight: bold;
   display: inline-block;
   cursor: pointer;
+  margin-left: 15px;
 }
 
 input[type=text], select {
@@ -153,7 +155,9 @@ label {
 }
 .qr img {
   padding: 10px;
-  border: 1px solid black;
+  border: 1px solid #cbcbcb;
+  background-color: #f2f2f2;
+  border-radius: 5px;
 }
 .qr {
   margin-top: 20px;
@@ -184,5 +188,6 @@ footer p {
 }
 footer {
   margin-top: auto;
+  margin-bottom: 0%;
 }
 

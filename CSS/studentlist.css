@@ -104,7 +104,7 @@ form {
 label {
   padding-right: 10px;
 }
-.button1 {
+.button {
   background-color: #912a15;
   border: none;
   border-radius: 8px;
@@ -116,12 +116,13 @@ label {
   display: inline-block;
   cursor: pointer;
   margin-top: 15px;
-  margin-bottom: 20px;
+  margin-left: 90%;
 }
 
 table {
   border-collapse: collapse;
   width: 100%;
+  margin-top: 15px;
 }
 td, th {
   border: 1.5px solid #cbcbcb;
@@ -137,42 +138,9 @@ th {
 td {
   font-family: Arial, Helvetica, sans-serif;
   background-color: #f0f0f0;
-}
-td a:link {
-  color: #912a15;
-  background-color: transparent;
-}
-td a:visited {
-  color: #912a15;
-  background-color: transparent;
-}
-td a:hover {
-  color: red;
-  background-color: transparent;
-  text-decoration: underline;
+  text-align: center;
 }
 
-.button2 {
-  background-color: #27ac5e;
-  border: none;
-  border-radius: 3px;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  font-weight: bold;
-  margin-right: 8px;
-}
-.button3 {
-  background-color: #c23827;
-  border: none;
-  border-radius: 3px;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  font-weight: bold;
-}
 /* footer */
 footer p {
   font-family: Arial, Helvetica, sans-serif;

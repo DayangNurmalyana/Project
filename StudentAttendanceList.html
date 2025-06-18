@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" href="CSS/slotlist.css">
+    <link rel="stylesheet" href="CSS/studentlist.css">
     <link rel="icon" type="image/x-icon" href="CSS/IMAGES/petakom-logo.png">
 <body>
     <!-- top navigation -->
@@ -26,28 +26,22 @@
 
     <!-- content -->
     <div class="rcorners1">
-        <h1>Attendance Slot List</h1>
-        <button class="button1" onclick="window.location.href='CreateAttendanceSlot.html'">Create New Slot</button>
+        <h1>Student Attendance List for <label for="event_id">event_id</label></h1>
         <table>
             <tr>
-                <th><label for="event_id">No</label></th>
-                <th>Event Name</th>
+                <th>No.</th>
+                <th>Name</th>
                 <th>Date</th>
                 <th>Time</th>
-                <th>Location</th>
-                <th>Key</th>
-                <th>Actions</th>
             </tr>
             <tr>
-                <td>1</td>
-                <td><a href="StudentAttendanceList.html">FYPro-Com</a></td>
-                <td>12/05/2025</td>
-                <td>10:00 AM</td>
-                <td>FKOM Astaka</td>
-                <td>abc123</td>
-                <td><button class="button2">Edit</button><button class="button3">Delete</button></td>
+                <td><label for="student_id">1</label></td>
+                <td><label for="student_name">Yana</label></td>
+                <td><label for="date"></label>12/05/2025</label></td>
+                <td><label for="time"></label>10:00 AM</label></td>
             </tr>
         </table>
+        <input class="button" type="button" value="Confirm" onclick="window.location.href='AttendanceSlotList.html'">
     </div>
 </div>
     <!-- bottom footer -->
