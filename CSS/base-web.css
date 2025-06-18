@@ -1,0 +1,92 @@
+body {
+    background-color: #6F1118;
+    background-image: url(IMAGES/redfkom.png);
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+/* navigation */
+nav {
+  width: 100%;
+  background-color: white;
+}
+nav ul {
+    background-color: white;
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+}
+nav li {
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+nav li a {
+    display: inline-block;
+    padding-top: 10px;
+}
+/* content */
+p {
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 50px;
+  margin-bottom: 0%;
+}
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 5px;
+  padding: 2px;
+}
+.rcorners1 {
+  border-radius: 25px;
+  background: white;
+  align-content: center;
+  padding: 20px; 
+  width: 70%;
+  height: 350px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.rcorners1 p {
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+form {
+  padding: 25px;
+  margin: auto;
+}
+label {
+  padding-right: 10px;
+}
+table{
+  border: none;
+}
+th{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: medium;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: left;
+}
+td{
+  padding-left: 65px;
+}
+
+/* footer */
+footer p {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: white;
+  padding: 10px;
+  text-align: center;
+  color: black;
+  font-size: small;
+}
+
