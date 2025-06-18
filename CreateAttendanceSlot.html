@@ -27,7 +27,7 @@
     <!-- content -->
     <div class="box1">
         <h1>Create Attendance Slot</h1>
-        <form action="PHP/create_attendance.html" method="post">
+        <form action="PHP/create_attendance.php" method="post">
             <label for="event">Select Event:</label><br>
             <select id="event" name="event" required>
                         <option value="">--Choose an Event--</option>
@@ -52,10 +52,14 @@
             <input class="button" type="submit" value="Create Slot">
             <input class="button" type="button" value="Cancel" onclick="window.location.href='AttendanceSlotList.html'">
         </form>
+        <div class="qr">
         <form action="" method="post">
-            <p>Qr code</p>
-            <a href="AttendanceRegister.html">Link</a>
+            <a href="AttendanceRegister.html"><img src="CSS/IMAGES/dummy-qr.png" alt="QR-code" width="100" height="100"></a>
+            <br>
+            <button>Download</button>
+
         </form>
+        </div>
     </div>
 </div>
     <!-- bottom footer -->
