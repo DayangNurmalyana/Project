@@ -1,8 +1,15 @@
 <?php
 include 'PHP/db_connection.php';
 
+// Get events that don't already have attendance slots
 $events = [];
-$result = $conn->query("SELECT event_id, event_name FROM events");
+$sql = "SELECT e.event_id, e.event_name 
+        FROM events e
+        WHERE NOT EXISTS (
+            SELECT 1 FROM attendance_slots a WHERE a.event_id = e.event_id
+        )";
+
+$result = $conn->query($sql);
 
 if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -46,7 +53,9 @@ if ($result && $result->num_rows > 0) {
             <select id="event" name="event" required>
                         <option value="">--Choose an Event--</option>
                         <?php foreach ($events as $event): ?>
-                            <option value="<?= $event['event_id'] ?>"><?= htmlspecialchars($event['event_name']) ?></option>
+                            <option value="<?= $event['event_id'] ?>">
+                                <?= htmlspecialchars($event['event_name']) ?>
+                            </option>
                         <?php endforeach; ?>
             </select><br>
 
