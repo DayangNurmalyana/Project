@@ -98,6 +98,10 @@ h1 {
   color: black;
   font-family: Arial, Helvetica, sans-serif;
 }
+.slotform {
+  display: inline-block;
+  width: 70%;
+}
 form {
   padding: 25px;
   margin: auto;
@@ -160,9 +164,10 @@ label {
   border-radius: 5px;
 }
 .qr {
-  margin-top: 20px;
-  align-content: center;
+  display: inline-block;
+  margin: auto;
   text-align: center;
+  margin-left: 10%;
 }
 .qr button {
   background-color: #23beee;

@@ -27,6 +27,7 @@
     <!-- content -->
     <div class="box1">
         <h1>Create Attendance Slot</h1>
+        <div class="slotform">
         <form action="PHP/create_attendance.php" method="post">
             <label for="event">Select Event:</label><br>
             <select id="event" name="event" required>
@@ -49,13 +50,14 @@
             <input type="text" id="slot_key" name="slot_key" placeholder="e.g. abc123" required><br>
 
             <br>
-            <input style="margin-left: 75%;" class="button" type="submit" value="Create Slot">
+            <input style="margin-left: 60%;" class="button" type="submit" value="Create Slot">
             <input class="button" type="button" value="Cancel" onclick="window.location.href='AttendanceSlotList.html'">
         </form>
+        </div>
         <div class="qr">
             <a href="AttendanceRegister.html"><img src="CSS/IMAGES/dummy-qr.png" alt="QR-code" width="100" height="100"></a>
             <br>
-            <button>Download</button>
+            <button type="button">Download</button>
         </div>
     </div>
 </div>

@@ -105,6 +105,20 @@ form {
   background-color: #f2f2f2;
   border-radius: 5px;
 }
+.button {
+  background-color: #912a15;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
 input[type=submit] {
   background-color: #912a15;
   border: none;
@@ -117,7 +131,7 @@ input[type=submit] {
   display: inline-block;
   cursor: pointer;
   margin-top: 20px;
-  margin-left: 90%;
+  margin-left: 78%;
 }
 
 input[type=text], select {
