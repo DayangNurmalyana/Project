@@ -1,26 +1,36 @@
 <?php
-// DB connection
-$conn = new mysqli("localhost", "root", "", "mypetakom");
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'db_connection.php'; // Include your DB connection
 
-// Get and sanitize input
-$event_id = $_POST['event_id'];
-$slot_date = $_POST['slot_date'];
-$slot_time = $_POST['slot_time'];
-$location = $conn->real_escape_string($_POST['location']);
-$slot_key = password_hash($_POST['slot_key'], PASSWORD_BCRYPT); // Hash the key for security
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get form values and sanitize them
+    $event_id = intval($_POST['event']);
+    $slot_date = $_POST['slot_date'];
+    $slot_time = $_POST['slot_time'];
+    $location = trim($_POST['location']);
+    $slot_key = trim($_POST['slot_key']);
 
-// Insert into DB
-$sql = "INSERT INTO attendance_slots (event_id, slot_date, slot_time, location, slot_key)
-        VALUES ('$event_id', '$slot_date', '$slot_time', '$location', '$slot_key')";
+    // Validate required fields
+    if (empty($event_id) || empty($slot_date) || empty($slot_time) || empty($location) || empty($slot_key)) {
+        die("All fields are required.");
+    }
 
-if ($conn->query($sql) === TRUE) {
-    echo "Attendance slot created successfully!";
+    // Prepare SQL insert statement
+    $stmt = $conn->prepare("INSERT INTO attendance_slots (event_id, slot_date, slot_time, location, slot_key) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("issss", $event_id, $slot_date, $slot_time, $location, $slot_key);
+
+    // Execute and check success
+    if ($stmt->execute()) {
+        // Optional: redirect to attendance slot list
+        header("Location: ../AttendanceSlotList.php");
+        exit();
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+
+    // Close connection
+    $stmt->close();
+    $conn->close();
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "Invalid request method.";
 }
-
-$conn->close();
 ?>
