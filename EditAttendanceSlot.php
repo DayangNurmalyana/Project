@@ -1,21 +1,29 @@
 <?php
 include 'PHP/db_connection.php';
 
-// Get events that don't already have attendance slots
-$events = [];
-$sql = "SELECT e.event_id, e.event_name 
-        FROM events e
-        WHERE NOT EXISTS (
-            SELECT 1 FROM attendance_slots a WHERE a.event_id = e.event_id
-        )";
-
-$result = $conn->query($sql);
-
-if ($result && $result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $events[] = $row;
-    }
+if (!isset($_GET['slot_id'])) {
+    echo "Invalid slot ID.";
+    exit();
 }
+
+$slot_id = intval($_GET['slot_id']);
+
+// Fetch slot data
+$sql = "SELECT a.slot_id, a.slot_date, a.slot_time, a.location, a.slot_key, e.event_name 
+        FROM attendance_slots a 
+        JOIN events e ON a.event_id = e.event_id 
+        WHERE a.slot_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $slot_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows === 0) {
+    echo "Attendance slot not found.";
+    exit();
+}
+
+$slot = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -48,32 +56,27 @@ if ($result && $result->num_rows > 0) {
     <div class="box1">
         <h1>Create Attendance Slot</h1>
         <div class="slotform">
-        <form action="PHP/create_attendance.php" method="post">
-            <label for="event">Select Event:</label><br>
-            <select id="event" name="event" required>
-                        <option value="">--Choose an Event--</option>
-                        <?php foreach ($events as $event): ?>
-                            <option value="<?= $event['event_id'] ?>">
-                                <?= htmlspecialchars($event['event_name']) ?>
-                            </option>
-                        <?php endforeach; ?>
-            </select><br>
+        <form action="PHP/update_attendance_slot.php" method="post">
+            <input type="hidden" name="slot_id" value="<?= $slot['slot_id'] ?>">
+
+            <label>Event:</label><br>
+            <input type="text" value="<?= htmlspecialchars($slot['event_name']) ?>" disabled><br>
 
             <label for="slot_date">Date:</label><br>
-            <input type="date" id="slot_date" name="slot_date" required><br>
+            <input type="date" id="slot_date" name="slot_date" value="<?= $slot['slot_date'] ?>" required><br>
 
             <label for="slot_time">Time:</label><br>
-            <input type="time" id="slot_time" name="slot_time" required><br>
+            <input type="time" id="slot_time" name="slot_time" value="<?= $slot['slot_time'] ?>" required><br>
 
-            <label for="location">Location (Geolocation):</label><br>
-            <input type="text" id="location" name="location" placeholder="e.g. FK Block C, UMPSA" required><br>
+            <label for="location">Location:</label><br>
+            <input type="text" id="location" name="location" value="<?= htmlspecialchars($slot['location']) ?>" required><br>
 
             <label for="slot_key">Key/Password:</label><br>
-            <input type="text" id="slot_key" name="slot_key" placeholder="e.g. abc123" required><br>
+            <input type="text" id="slot_key" name="slot_key" value="<?= htmlspecialchars($slot['slot_key']) ?>" required><br>
 
             <br>
-            <input style="margin-left: 60%;" class="button" type="submit" value="Create Slot">
-            <input class="button" type="button" value="Cancel" onclick="window.location.href='AttendanceSlotList.php'">
+            <input type="submit" class="button" value="Update Slot">
+            <input type="button" class="button" value="Cancel" onclick="window.location.href='AttendanceSlotList.php'">
         </form>
         </div>
         <div class="qr">

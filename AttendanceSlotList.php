@@ -50,15 +50,24 @@ $result = $conn->query($sql);
                 <th>Key</th>
                 <th>Actions</th>
             </tr>
-            <tr>
-                <td><label for="slot_id"></label></td>
-                <td><label for="event_name"><a href="StudentAttendanceList.html"></a></label></td>
-                <td><label for="slot_date"></label></td>
-                <td><label for="slot_time"></label></td>
-                <td><label for="location"></label></td>
-                <td><label for="slot_key"></label></td>
-                <td><button class="button2">Edit</button><button class="button3">Delete</button></td>
-            </tr>
+            <?php if ($result && $result->num_rows > 0): 
+                $no = 1;
+                while ($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <td><?= $no++ ?></td>
+                    <td><a href="StudentAttendanceList.php?slot_id=<?= $row['slot_id'] ?>"><?= htmlspecialchars($row['event_name']) ?></a></td>
+                    <td><?= htmlspecialchars($row['slot_date']) ?></td>
+                    <td><?= htmlspecialchars($row['slot_time']) ?></td>
+                    <td><?= htmlspecialchars($row['location']) ?></td>
+                    <td><?= htmlspecialchars($row['slot_key']) ?></td>
+                    <td>
+                        <a href="EditAttendanceSlot.php?slot_id=<?= $row['slot_id'] ?>"><button class="button2">Edit</button></a>
+                        <a href="PHP/delete_attendance_slot.php?slot_id=<?= $row['slot_id'] ?>" onclick="return confirm('Are you sure you want to delete this slot?');"><button class="button3">Delete</button></a>
+                    </td>
+                </tr>
+            <?php endwhile; else: ?>
+                <tr><td colspan="7">No attendance slots found.</td></tr>
+            <?php endif; ?>
         </table>
     </div>
 </div>
