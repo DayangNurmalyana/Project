@@ -77,7 +77,7 @@ if ($result && $result->num_rows > 0) {
         </form>
         </div>
         <div class="qr">
-            <a href="AttendanceRegister.html"><img src="CSS/IMAGES/dummy-qr.png" alt="QR-code" width="100" height="100"></a>
+            <a href="AttendanceRegister.php"><img src="CSS/IMAGES/dummy-qr.png" alt="QR-code" width="100" height="100"></a>
             <br>
             <button type="button">Download</button>
         </div>

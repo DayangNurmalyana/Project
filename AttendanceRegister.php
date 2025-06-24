@@ -28,22 +28,22 @@
     <div class="rcorners1">
         <h1>Event Attendance Registration</h1>
         <form action="" method="post">
-            <label for="eventname">Attendance for event name</label><br><br>
+            <label for="event_name">Attendance for event name</label><br><br>
 
             <label for="location">Location:</label><br>
-            <label for="geolocation" id="location" name="location">"Event geolocation"</label><br><br>
+            <label for="geolocation" id="location" name="location"></label><br><br>
 
-            <label for="eventdetails">Event details:</label><br>
-            <label for="eventdesc" id="description" name="description">"Event description"</label><br><br>
+            <label for="description">Event details:</label><br>
+            <label for="description" id="description" name="description"></label><br><br>
 
-            <label for="studentNum">Student ID:</label><br>
-            <input type="text" id="studentNum" name="studentNum" required><br><br>
+            <label for="matricNo">Matric No:</label><br>
+            <input type="text" id="matricNo" name="MatricNo" required><br><br>
 
-            <label for="attendancepassword">Password:</label><br>
-            <input type="text" id="attendancepassword" name="attendancepassword" required><br>
+            <label for="slot_key">Password:</label><br>
+            <input type="text" id="slot_key" name="slot_key" required><br>
 
             <input type="submit" value="Submit">
-            <input class="button" type="button" value="Cancel" onclick="window.location.href='CreateAttendanceSlot.html'">
+            <input class="button" type="button" value="Cancel" onclick="window.location.href='AttendanceSlotList.php'">
         </form>
     </div>
 </div>

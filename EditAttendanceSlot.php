@@ -54,7 +54,7 @@ $slot = $result->fetch_assoc();
 
     <!-- content -->
     <div class="box1">
-        <h1>Create Attendance Slot</h1>
+        <h1>Edit Attendance Slot</h1>
         <div class="slotform">
         <form action="PHP/update_attendance_slot.php" method="post">
             <input type="hidden" name="slot_id" value="<?= $slot['slot_id'] ?>">
