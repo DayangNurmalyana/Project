@@ -67,7 +67,7 @@ $result = $stmt->get_result();
                 <th>No.</th>
                 <th>Name</th>
                 <th>Matric ID</th>
-                <th>Attendance Time</th>
+                <th>Check-In Time</th>
             </tr>
             <?php
                 $no = 1;
