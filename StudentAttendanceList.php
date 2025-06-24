@@ -2,38 +2,35 @@
 include 'PHP/db_connection.php';
 
 if (!isset($_GET['slot_id'])) {
-    echo "Invalid slot ID.";
-    exit();
+    echo "Slot ID not provided.";
+    exit;
 }
 
 $slot_id = intval($_GET['slot_id']);
 
-// Get event name (optional but useful)
-$event_name = '';
-$event_sql = "SELECT e.event_name FROM events e
-              JOIN attendance_slots a ON a.event_id = e.event_id
+// Fetch event name for display (optional)
+$event_sql = "SELECT e.event_name 
+              FROM attendance_slots a 
+              JOIN events e ON a.event_id = e.event_id 
               WHERE a.slot_id = ?";
-$stmt = $conn->prepare($event_sql);
-$stmt->bind_param("i", $slot_id);
-$stmt->execute();
-$stmt->bind_result($event_name);
-$stmt->fetch();
-$stmt->close();
+$event_stmt = $conn->prepare($event_sql);
+$event_stmt->bind_param("i", $slot_id);
+$event_stmt->execute();
+$event_result = $event_stmt->get_result();
+$event_name = "Unknown Event";
 
-// Get student attendance for that slot
-$attendance = [];
-$sql = "SELECT student_name, matric_id, check_in_time 
-        FROM attendance_records 
-        WHERE slot_id = ?";
-$stmt = $conn->prepare($sql);
+if ($event_result && $event_row = $event_result->fetch_assoc()) {
+    $event_name = $event_row['event_name'];
+}
+
+// Fetch student attendance for that slot
+$attendance_sql = "SELECT studentID, studentName, matricNo, attendance_time 
+                   FROM attendance 
+                   WHERE slot_id = ?";
+$stmt = $conn->prepare($attendance_sql);
 $stmt->bind_param("i", $slot_id);
 $stmt->execute();
 $result = $stmt->get_result();
-while ($row = $result->fetch_assoc()) {
-    $attendance[] = $row;
-}
-$stmt->close();
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +61,7 @@ $conn->close();
 
     <!-- content -->
     <div class="rcorners1">
-        <h1>Student Attendance List for <em><?= htmlspecialchars($event_name) ?></em></h1>
+        <h1>Student Attendance List for <?= htmlspecialchars($event_name) ?></h1>
         <table>
             <tr>
                 <th>No.</th>
@@ -72,17 +69,21 @@ $conn->close();
                 <th>Matric ID</th>
                 <th>Attendance Time</th>
             </tr>
-            <?php if (!empty($attendance)): ?>
-                <?php $no = 1; foreach ($attendance as $student): ?>
-                    <tr>
-                        <td><?= $no++ ?></td>
-                        <td><?= htmlspecialchars($student['student_name']) ?></td>
-                        <td><?= htmlspecialchars($student['matric_id']) ?></td>
-                        <td><?= htmlspecialchars($student['check_in_time']) ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <tr><td colspan="4">No students have checked in for this slot yet.</td></tr>
+            <?php
+                $no = 1;
+                if ($result && $result->num_rows > 0):
+                    while ($row = $result->fetch_assoc()):
+                ?>
+                <tr>
+                    <td><?= $no++ ?></td>
+                    <td><?= htmlspecialchars($row['studentName']) ?></td>
+                    <td><?= htmlspecialchars($row['matricNo']) ?></td>
+                    <td><?= htmlspecialchars($row['attendance_time']) ?></td>
+                </tr>
+                <?php endwhile; else: ?>
+                <tr>
+                    <td colspan="4">No attendance records found.</td>
+                </tr>
             <?php endif; ?>
         </table>
         <br>
